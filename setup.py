@@ -9,7 +9,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='wagtailsweetcaptcha',
-    version='0.1',
+    version='0.1.1',
     packages=['wagtailsweetcaptcha'],
     install_requires=['django-sweetcaptcha'],
     include_package_data=True,

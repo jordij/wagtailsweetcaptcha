@@ -24,7 +24,7 @@ class SweetCaptchaEmailForm(AbstractEmailForm):
             content = ''
             for x in form.fields.items():
                 if not isinstance(x[1], SweetCaptchaField):  # exclude SweetCaptchaField from notification
-                    content += '\n'.join([x[1].label + ': ' + text_type(form.data.get(x[0]))])
+                    content += '\n' + x[1].label + ': ' + text_type(form.data.get(x[0]))
             tasks.send_email_task.delay(self.subject, content, [self.to_address], self.from_address,)
 
     class Meta:
