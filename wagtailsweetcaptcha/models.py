@@ -2,7 +2,7 @@ from six import text_type
 
 from sweetcaptcha.fields import SweetCaptchaField
 
-from wagtail.wagtailadmin import tasks
+from wagtail.wagtailadmin.utils import send_mail
 from wagtail.wagtailforms.models import AbstractEmailForm, AbstractForm
 
 from .forms import SweetCaptchaFormBuilder
@@ -25,7 +25,7 @@ class SweetCaptchaEmailForm(AbstractEmailForm):
             for x in form.fields.items():
                 if not isinstance(x[1], SweetCaptchaField):  # exclude SweetCaptchaField from notification
                     content += '\n' + x[1].label + ': ' + text_type(form.data.get(x[0]))
-            tasks.send_email_task.delay(self.subject, content, [self.to_address], self.from_address,)
+            send_mail(self.subject, content, [self.to_address], self.from_address,)
 
     class Meta:
         abstract = True
